@@ -10,6 +10,8 @@ function get_free_book_url {
 }
 
 BOOK="$(get_free_book_url)"
+BOOK=${BOOK##*/}
 
-echo "${BOOK@Q}"
-curl -#O -C - "${PREFIX}/download/${BOOK##*/}.pdf"
+echo -n "Downloading ${BOOK@Q}... "
+curl -sO -C - "${PREFIX}/download/${BOOK}.pdf"
+echo "done."
