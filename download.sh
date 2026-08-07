@@ -27,6 +27,11 @@ function get_free_book_url {
 }
 
 BOOK="$(get_free_book_url)"
+if [[ -z "$BOOK" ]]; then
+  echo "Error: could not find a free book URL." >&2
+  exit 1
+fi
+BOOK="${BOOK%/}"
 BOOK=${BOOK##*/}
 
 echo -n "Downloading ${BOOK@Q}... "
